@@ -15,14 +15,16 @@ public class Poi {
     private double longitud;
     private String nombre;
     private String descripcion;
+    private String categoria;
 
     public Poi() {}
 
-    public Poi(double latitud, double longitud, String nombre, String descripcion) {
+    public Poi(double latitud, double longitud, String nombre, String descripcion, String categoria) {
         this.latitud = latitud;
         this.longitud = longitud;
         this.nombre = nombre;
         this.descripcion = descripcion;
+        this.categoria = categoria;
     }
 
     public double getLatitud() {
@@ -39,5 +41,13 @@ public class Poi {
 
     public String getDescripcion() {
         return descripcion;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 }
