@@ -9,5 +9,8 @@ public class VerificacionPasos {
     @Given("el sistema tiene registrado Rapa nui, Freddo y Buenos aires verde")
     public void elSistemaTieneRegistradoRapaNuiFreddoYBuenosAiresVerde() {
     }
+    @Given("el sistema tiene registrado distintos itinerarios")
+    public void elSistemaTieneRegistradoDistintosItinerarios() {
+    }
 
 }

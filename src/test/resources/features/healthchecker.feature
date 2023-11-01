@@ -56,3 +56,45 @@ Feature: Verificacion de aplicación levantada
         """
         []
         """
+
+    Scenario: Mostrar el itinerario Fiesta 1
+        Given el sistema tiene registrado distintos itinerarios
+        When el cliente hace un GET a "/itinerario/fiesta1"
+        Then recibe la respuesta con codigo de estado 200 y contenido
+        """
+        {
+            "nombre": "Fiesta1",
+            "descripcion": "Almuerzo y postre",
+            "listaDePois": [
+                            {
+                                "latitud": -34.58428917744298,
+                                "longitud": -58.43766774433044,
+                                "nombre": "Buenos aires verde",
+                                "descripcion": "Un restaurant verde",
+                                "categoria": "restaurant"
+                            },
+                            {
+                                "latitud": -34.58791299400182,
+                                "longitud": -58.423084840222,
+                                "nombre": "Rapa nui",
+                                "descripcion": "Una rica heladeria",
+                                "categoria": "heladeria"
+                            },
+                            {
+                                "latitud": -34.588097427250915,
+                                "longitud": -58.430480822197964,
+                                "nombre": "Polaris Omakase",
+                                "descripcion": "Un bar",
+                                "categoria": "bar"
+                            }
+                          ]
+        }
+        """
+
+    Scenario: Mostrar mensaje de error con el itinerario Fiesta 2
+        Given el sistema tiene registrado distintos itinerarios
+        When el cliente hace un GET a "/itinerario/fiesta2"
+        Then recibe la respuesta con codigo de estado 404 y contenido
+        """
+        { "mensaje": "Itinerario no encontrado" }
+        """
