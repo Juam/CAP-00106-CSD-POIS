@@ -6,8 +6,8 @@ public class VerificacionPasos {
     @Given("la aplicacion está levantada")
     public void laAplicacionEstaLevantada() {
     }
-    @Given("el sistema tiene registrado Rapa nui y Freddo")
-    public void elSistemaTieneRegistradoRapaNuiYFreddo() {
+    @Given("el sistema tiene registrado Rapa nui, Freddo y Buenos aires verde")
+    public void elSistemaTieneRegistradoRapaNuiFreddoYBuenosAiresVerde() {
     }
 
 }

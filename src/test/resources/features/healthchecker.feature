@@ -10,8 +10,8 @@ Feature: Verificacion de aplicación levantada
         }
         """
 
-    Scenario: Encontrar todos los puntos de interes de una categoria de la categoria heladeria
-        Given el sistema tiene registrado Rapa nui y Freddo
+    Scenario: Encontrar todos los puntos de interes de la categoria heladeria
+        Given el sistema tiene registrado Rapa nui, Freddo y Buenos aires verde
         When el cliente hace un GET a "/categoria/heladeria/pois"
         Then recibe la respuesta con codigo de estado 200 y contenido
         """
@@ -33,8 +33,24 @@ Feature: Verificacion de aplicación levantada
         ]
         """
 
-    Scenario: Encontrar todos los puntos de interes de una categoria de la categoria pizzeria
-        Given el sistema tiene registrado Rapa nui y Freddo
+    Scenario: Encontrar todos los puntos de interes de la categoria restaurant
+        Given el sistema tiene registrado Rapa nui, Freddo y Buenos aires verde
+        When el cliente hace un GET a "/categoria/restaurant/pois"
+        Then recibe la respuesta con codigo de estado 200 y contenido
+        """
+        [
+            {
+                "latitud": -34.58428917744298,
+                "longitud": -58.43766774433044,
+                "nombre": "Buenos aires verde",
+                "descripcion": "Un restaurant verde",
+                "categoria": "restaurant"
+            }
+        ]
+        """
+
+    Scenario: Encontrar todos los puntos de interes de la categoria pizzeria
+        Given el sistema tiene registrado Rapa nui, Freddo y Buenos aires verde
         When el cliente hace un GET a "/categoria/pizzeria/pois"
         Then recibe la respuesta con codigo de estado 200 y contenido
         """
