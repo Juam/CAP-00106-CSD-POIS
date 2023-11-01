@@ -96,5 +96,5 @@ Feature: Verificacion de aplicación levantada
         When el cliente hace un GET a "/itinerario/fiesta2"
         Then recibe la respuesta con codigo de estado 404 y contenido
         """
-        { "mensaje": "Itinerario no encontrado1" }
+        { "mensaje": "Itinerario no encontrado" }
         """
