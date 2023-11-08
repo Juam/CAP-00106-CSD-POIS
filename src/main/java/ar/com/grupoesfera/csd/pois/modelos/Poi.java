@@ -50,4 +50,8 @@ public class Poi {
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
+
+    public Double distancia(Double latitud, Double longitud) {
+        return Math.sqrt(Math.pow(this.latitud - latitud, 2) + Math.pow(this.longitud - longitud, 2));
+    }
 }

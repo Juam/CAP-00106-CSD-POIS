@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,8 +28,13 @@ public class POISService {
                             new Poi(-34.579905299200256, -58.43378348981585,"Jauja","Otra heladeria cerrada permanentemente","heladeria"),
                             new Poi(-34.588097427250915, -58.430480822197964,"Polaris Omakase","Un bar","bar")
                     )))));
-    public List<Poi> obtenerPOISDeUnaCategoria(String categoria) {
-        return lista.stream().filter(p -> p.getCategoria().equals(categoria)).collect(Collectors.toList());
+    public List<Poi> obtenerPOISDeUnaCategoria(String categoria, Double latitud, Double longitud) {
+        if (latitud != null && longitud != null) {
+            Poi poi = lista.stream().filter(p -> p.getCategoria().equals(categoria)).min(Comparator.comparing(p -> p.distancia(latitud, longitud))).orElse(null);
+            return Arrays.asList(poi);
+        } else {
+            return lista.stream().filter(p -> p.getCategoria().equals(categoria)).collect(Collectors.toList());
+        }
     }
 
     public Itinerario obtenerItinerarioPorNombre(String nombre) {

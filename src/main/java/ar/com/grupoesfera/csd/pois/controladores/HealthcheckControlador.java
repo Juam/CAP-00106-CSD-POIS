@@ -5,6 +5,7 @@ import ar.com.grupoesfera.csd.pois.modelos.Poi;
 import ar.com.grupoesfera.csd.pois.modelos.Pong;
 import ar.com.grupoesfera.csd.pois.service.POISService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -25,8 +26,10 @@ public class HealthcheckControlador {
     }
 
     @GetMapping("/categoria/{categoria}/pois")
-    public ResponseEntity<List<Poi>> obtengoLosPoisDeUnaCategoria(@PathVariable("categoria") String categoria){
-        return ResponseEntity.ok(poisService.obtenerPOISDeUnaCategoria(categoria));
+    public ResponseEntity<List<Poi>> obtengoLosPoisDeUnaCategoria(@PathVariable("categoria") String categoria,
+                                                                  @RequestParam(value = "latitud", required = false) Double latitud,
+                                                                  @RequestParam(value = "longitud", required = false) Double longitud){
+        return ResponseEntity.ok(poisService.obtenerPOISDeUnaCategoria(categoria, latitud, longitud));
     }
 
     @GetMapping("/itinerario/{nombre}")
