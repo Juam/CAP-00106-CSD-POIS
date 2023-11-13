@@ -30,7 +30,7 @@ public class POISService {
                     )))));
     public List<Poi> obtenerPOISDeUnaCategoria(String categoria, Double latitud, Double longitud) {
         if (latitud != null && longitud != null) {
-            Poi poi = lista.stream().filter(p -> p.getCategoria().equals(categoria)).min(Comparator.comparing(p -> p.distancia(latitud, longitud))).orElse(null);
+            Poi poi = lista.stream().filter(p -> p.getCategoria().equals(categoria)).min(Comparator.comparing(p -> p.distancia(latitud, longitud))).orElse(null);//Estabamos buscando la maxima distancia en lugar de la minima
             return Arrays.asList(poi);
         } else {
             return lista.stream().filter(p -> p.getCategoria().equals(categoria)).collect(Collectors.toList());
