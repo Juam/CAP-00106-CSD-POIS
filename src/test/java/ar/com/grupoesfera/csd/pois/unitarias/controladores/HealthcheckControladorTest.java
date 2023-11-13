@@ -32,7 +32,7 @@ public class HealthcheckControladorTest {
     @Test
     public void verificarQueLaDistanciaEntreUnPoiYUnaUbicacionEs1() {
         Poi poi = new Poi(1,1,"Rapa nui","Una rica heladeria","heladeria");
-        Double distancia = poi.distancia(new Double(2),new Double(2));
+        Double distancia = poi.distancia(Double.valueOf(2),Double.valueOf(2));
 
         assertThat(distancia).isEqualTo(Math.sqrt(2));
     }

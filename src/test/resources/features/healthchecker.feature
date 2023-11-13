@@ -114,3 +114,19 @@ Feature: Verificacion de aplicación levantada
             }
         ]
         """
+
+    Scenario: Encontrar los puntos de interes mas cercano a mi ubicacion actual que se encuentran a una distancia de 0.004 de la categoria heladeria
+        Given el sistema tiene registrado Rapa nui, Freddo y Buenos aires verde
+        When el cliente hace un GET a "/categoria/heladeria/pois?latitud=-34.58791299400180&longitud=-58.423084840220&distancia=0.004"
+        Then recibe la respuesta con codigo de estado 200 y contenido
+        """
+        [
+            {
+                "latitud": -34.58791299400182,
+                "longitud": -58.423084840222,
+                "nombre": "Rapa nui",
+                "descripcion": "Una rica heladeria",
+                "categoria": "heladeria"
+            }
+        ]
+        """

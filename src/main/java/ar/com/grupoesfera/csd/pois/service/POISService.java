@@ -2,6 +2,8 @@ package ar.com.grupoesfera.csd.pois.service;
 
 import ar.com.grupoesfera.csd.pois.modelos.Itinerario;
 import ar.com.grupoesfera.csd.pois.modelos.Poi;
+import ar.com.grupoesfera.csd.pois.repositorio.RepositorioDePoi;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -13,6 +15,8 @@ import java.util.stream.Collectors;
 @Service
 public class POISService {
 
+    @Autowired
+    RepositorioDePoi repositorioDePoi;
     private List<Poi> lista = new ArrayList<>(
             Arrays.asList(new Poi(-34.58791299400182,-58.423084840222,"Rapa nui","Una rica heladeria","heladeria"),
                     new Poi(-34.58958675108932,-58.42795175118532,"Freddo","Otra heladeria","heladeria"),
@@ -28,16 +32,22 @@ public class POISService {
                             new Poi(-34.579905299200256, -58.43378348981585,"Jauja","Otra heladeria cerrada permanentemente","heladeria"),
                             new Poi(-34.588097427250915, -58.430480822197964,"Polaris Omakase","Un bar","bar")
                     )))));
-    public List<Poi> obtenerPOISDeUnaCategoria(String categoria, Double latitud, Double longitud) {
+    public List<Poi> obtenerPOISDeUnaCategoria(String categoria, Double latitud, Double longitud, Double distancia) {
+        List<Poi> lista = repositorioDePoi.findAll();
         if (latitud != null && longitud != null) {
-            Poi poi = lista.stream().filter(p -> p.getCategoria().equals(categoria)).min(Comparator.comparing(p -> p.distancia(latitud, longitud))).orElse(null);//Estabamos buscando la maxima distancia en lugar de la minima
-            return Arrays.asList(poi);
+            if (distancia != null) {
+                return lista.stream().filter(p -> p.getCategoria().equals(categoria)).filter(p -> p.distancia(latitud, longitud) < distancia).collect(Collectors.toList());
+            } else {
+                Poi poi = lista.stream().filter(p -> p.getCategoria().equals(categoria)).min(Comparator.comparing(p -> p.distancia(latitud, longitud))).orElse(null);//Estabamos buscando la maxima distancia en lugar de la minima
+                return Arrays.asList(poi);
+            }
         } else {
             return lista.stream().filter(p -> p.getCategoria().equals(categoria)).collect(Collectors.toList());
         }
     }
 
     public Itinerario obtenerItinerarioPorNombre(String nombre) {
+        //List<Itinerario> itinerarios = repositorioDeItinerarios.findAll();
         return itinerarios.stream().filter(i -> i.getNombre().equalsIgnoreCase(nombre)).findFirst().orElse(null);
     }
 }

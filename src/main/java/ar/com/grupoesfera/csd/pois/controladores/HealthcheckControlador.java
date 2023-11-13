@@ -28,8 +28,9 @@ public class HealthcheckControlador {
     @GetMapping("/categoria/{categoria}/pois")
     public ResponseEntity<List<Poi>> obtengoLosPoisDeUnaCategoria(@PathVariable("categoria") String categoria,
                                                                   @RequestParam(value = "latitud", required = false) Double latitud,
-                                                                  @RequestParam(value = "longitud", required = false) Double longitud){
-        return ResponseEntity.ok(poisService.obtenerPOISDeUnaCategoria(categoria, latitud, longitud));
+                                                                  @RequestParam(value = "longitud", required = false) Double longitud,
+                                                                  @RequestParam(value = "distancia", required = false) Double distancia){
+        return ResponseEntity.ok(poisService.obtenerPOISDeUnaCategoria(categoria, latitud, longitud, distancia));
     }
 
     @GetMapping("/itinerario/{nombre}")
