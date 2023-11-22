@@ -5,11 +5,13 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.javacrumbs.jsonunit.core.Option;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
 import static net.javacrumbs.jsonunit.spring.JsonUnitResultMatchers.json;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class PedidosHTTPPasos {
@@ -23,6 +25,12 @@ public class PedidosHTTPPasos {
     @When("el cliente hace un GET a {string}")
     public void elClienteHaceUnGETA(String ruta) throws Exception {
         ResultActions resultado = mockMvc.perform(get(ruta));
+        this.contextoCompartido.agregarResultado(resultado);
+    }
+
+    @When("el cliente hace un POST a {string} con contenido")
+    public void elClienteHaceUnPostA(String ruta, String contenido) throws Exception {
+        ResultActions resultado = mockMvc.perform(post(ruta).contentType(MediaType.APPLICATION_JSON).content(contenido));
         this.contextoCompartido.agregarResultado(resultado);
     }
 

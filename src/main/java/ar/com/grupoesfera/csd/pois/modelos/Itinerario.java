@@ -1,11 +1,17 @@
 package ar.com.grupoesfera.csd.pois.modelos;
 
+import javax.persistence.*;
 import java.util.List;
 
+@Entity
 public class Itinerario {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String nombre;
     private String descripcion;
+    @OneToMany
     private List<Poi> listaDePois;
 
     public Itinerario() {
